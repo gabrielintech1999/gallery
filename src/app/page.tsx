@@ -13,9 +13,6 @@ export default async function Page() {
   });
   return (
     <main>
-      <header className="mb-4 bg-black p-4 text-center uppercase text-white">
-        <h1>Gallery</h1>
-      </header>
       <div>
         <div className="flex flex-wrap gap-8">
           {images.map((image) => (
