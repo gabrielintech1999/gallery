@@ -7,7 +7,8 @@ This is a gallery of images that can be used for testing purposes.
 [x] - basic setup
 [x] - deploy to vercel
 [x] - scaffolding with mock data
-[] - connect to database
+[x] - connect to database
+[] - add authentication (w/clerk)
 [] - build schema for database
 [] - add authentication
 [] - add search

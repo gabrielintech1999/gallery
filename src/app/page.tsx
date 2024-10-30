@@ -4,21 +4,13 @@ import { db } from "~/server/db";
 
 export const dynamic = "force-dynamic"; // search later
 
-const urlsImages = [
-  "https://utfs.io/f/FnSxuIF3dG16rmLFoiA1I8gVveKUMlBFYaOP5CuhZSRfTXjJ",
-  "https://utfs.io/f/FnSxuIF3dG16rmLFoiA1I8gVveKUMlBFYaOP5CuhZSRfTXjJ",
-  "https://utfs.io/f/FnSxuIF3dG16rmLFoiA1I8gVveKUMlBFYaOP5CuhZSRfTXjJ",
-  "https://utfs.io/f/FnSxuIF3dG16rmLFoiA1I8gVveKUMlBFYaOP5CuhZSRfTXjJ",
-  "https://utfs.io/f/FnSxuIF3dG16rmLFoiA1I8gVveKUMlBFYaOP5CuhZSRfTXjJ",
-];
 
-const photos = urlsImages.map((url, index) => ({
-  id: index,
-  url,
-}));
+
 
 export default async function Page() {
-  const posts = await db.query.posts.findMany();
+  const images = await db.query.images.findMany({
+    orderBy: (model, {desc}) => desc(model.id)
+  });
   return (
     <main>
       <header className="mb-4 bg-black p-4 text-center uppercase text-white">
@@ -26,20 +18,11 @@ export default async function Page() {
       </header>
       <div>
         <div className="flex flex-wrap gap-8">
-          <div>
-            {posts.map((post) => (
-              <div key={post.id}>
-                <h2>{post.name}</h2>
-              </div>
-            ))}
-          </div>
-          {photos.map((photo) => (
-            <img
-              src={photo.url}
-              key={photo.id}
-              className="h-auto"
-              alt="gallery"
-            />
+          {images.map((image) => (
+            <div key={image.id}>
+              <img src={image.url} className="h-auto" alt="gallery" />
+              <div>{image.name}</div>
+            </div>
           ))}
         </div>
       </div>
